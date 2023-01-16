@@ -1,4 +1,4 @@
-#include "utils/options.h"
+#include "options.h"
 #include <unordered_map>
 
 using namespace std;
@@ -15,9 +15,10 @@ class MarketMaker {
 
     marketOptions allOptions;
     double pnl;
+    string time_stamp;
 
 public:
     MarketMaker();
-};
 
-MarketMaker::MarketMaker() { pnl = 0; }
+    bool newTimeStamp(string cur_time);
+};

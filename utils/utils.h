@@ -1,14 +1,17 @@
+#include <boost/interprocess/ipc/message_queue.hpp>
 #include <string>
 #include <filesystem>
 #include <fstream>
+#include <vector>
 
-
-namespace constants 
+namespace consts 
 {
-    const int DELAY = 2000;
+    const int DELAY = 5;
     const std::string STOCK_PATH = "data/AMZN_STOCK_XFM";
     const std::string OPTION_PATH = "data/AMZN_OPTIONS_XFM";
     const std::string FIFO_PATH = "fifo";
+    const size_t MAX_MSG_SIZE = 0x100;
+    const size_t MAX_NUM_MSG = 100;
 }
 
 namespace underlying
