@@ -1,4 +1,4 @@
-#include <string>
+#include "stock.h"
 #include <iostream>
 #include <iomanip>
 
@@ -7,6 +7,12 @@ using namespace std;
 class Option {
 protected:
     static int nextID;
+    double bidPrice;
+    double askPrice;
+    double position;
+    double longPrice;
+    double shortPrice;
+
 public:
     int id;
     string ticker;
@@ -14,17 +20,16 @@ public:
     string expiration;
     double strikePrice;
 
-    double bidPrice;
-    double askPrice;
-    double position;
-    double longPrice;
-    double shortPrice;
 
     Option();
     Option(string ticker, char callPut, string expiary, double strike);
-    bool operator==(const Option &other);
-    friend ostream& operator<<(ostream& os, const Option& op);
+    
     string toString();
+    double calcPrice(Stock stock);
+    void setOptionPrice(Stock baseline, double spread);
+    
+    bool operator==(const Option &other) { return other.id == this->id; }
+    friend ostream& operator<<(ostream& os, const Option& op);
 };
 
 int Option::nextID = 0;
@@ -47,11 +52,6 @@ Option::Option(string t, char cp, string e, double s)
     callPut = cp;
     expiration = e;
     strikePrice = s;
-}
-
-bool Option::operator==(const Option &other)
-{
-    return other.id == this->id;
 }
 
 ostream& operator<<(ostream& os, const Option& op)

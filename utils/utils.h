@@ -1,23 +1,13 @@
 #include <boost/interprocess/ipc/message_queue.hpp>
-#include <string>
-#include <iostream>
 #include <filesystem>
+#include <iostream>
 #include <fstream>
+#include <string>
 #include <vector>
 #include <time.h>
 #include <random>
 
 using namespace std;
-
-double getRand()
-{
-    double lower = 0;
-    double upper = 1000;
-    srand(time(NULL));
-    uniform_real_distribution<double>  unif(lower,upper);
-    default_random_engine re;
-    return unif(re);
-}
 
 namespace consts 
 {
@@ -27,6 +17,11 @@ namespace consts
     const std::string TRADED_OPTION_PATH = "data/TRADED_OPTIONS";
     const size_t MAX_MSG_SIZE = 0x100;
     const size_t MAX_NUM_MSG = 100;
+    const double spread = 0.01;
+    const double DELTA_T = 0.1;
+    const double RISK_FREE_RATE = 0.03;
+    const double ANNUALIZED_VOLITLITY = 0.2;
+    const int YEARS_TO_EXPIRATION = 2;
 }
 
 namespace underlying
